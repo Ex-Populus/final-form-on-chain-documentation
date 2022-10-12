@@ -95,3 +95,5 @@ Once 4 cards have been evolved successfully you will get a whitelist token in re
 | DAG RARE `73KadFNX7xRtXLn9hFUmz9qMB1tZZrfEVL8YB51yiKrV`       | `9Dw4j3U92X9j1Hbj6oTiVCi9o9cadZzvQKz1wEmUvVWZ` |
 | DAG EPIC `4h8mu3aTFaWVrtMAExiEuSy5EjeG3UktCrr1LHBNAxUz`       | `5J8nKa2yr6MSqaAhyjQ9sbV5eZxMNvVcHdPm7utryouv` |
 | DAG LEGENDARY `8jbSppGXTgmkDGps7XKpvwAkS1pbBcNjvWJvZWwGCnmn`  | `FqWxNzu8U96ptrMzcNVPEzuoV9v7JzTY72mJ7d831Z8N` |
+
+Metaplex candy machine documentation: https://github.com/metaplex-foundation/metaplex-program-library/tree/master/candy-machine/js
