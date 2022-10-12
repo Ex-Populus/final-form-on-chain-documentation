@@ -82,7 +82,7 @@ const txSig = await FinalFormSDK.evolve(
 
 
 ```
-const txSig = await FinalFormSDK.evolve(new PublicKey("2Q3jhm1MVsst9ye7LmrRbjNaMooLt6jKBdoG7bAeDgYe"), wallet);
+const txSig = await FinalFormSDK.burnLegendary(new PublicKey("2Q3jhm1MVsst9ye7LmrRbjNaMooLt6jKBdoG7bAeDgYe"), wallet);
 
 ```
 
