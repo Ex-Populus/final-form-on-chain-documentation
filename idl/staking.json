@@ -1,0 +1,766 @@
+{
+  "version": "0.1.0",
+  "name": "staking",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "initializeUserPool",
+      "accounts": [
+        {
+          "name": "userPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "createFarm",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "tierDuration",
+          "type": {
+            "vec": "i64"
+          }
+        },
+        {
+          "name": "tierRate",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "count",
+          "type": "u64"
+        },
+        {
+          "name": "config",
+          "type": {
+            "defined": "FarmConfig"
+          }
+        }
+      ]
+    },
+    {
+      "name": "updateFarm",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "newTierDuration",
+          "type": {
+            "vec": "i64"
+          }
+        },
+        {
+          "name": "newTierRate",
+          "type": {
+            "vec": "u64"
+          }
+        },
+        {
+          "name": "config",
+          "type": {
+            "defined": "FarmConfig"
+          }
+        }
+      ]
+    },
+    {
+      "name": "setStop",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "isStop",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "stakeNftToPool",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "destNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "mintMetadata",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "the mint metadata"
+          ]
+        },
+        {
+          "name": "wlConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenMetadataProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "claimReward",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chromosPortal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "portalProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "portalProof",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reportData",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "claimRewards",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chromosPortal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "portalProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "portalProof",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reportData",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "unstakeNftFromPool",
+      "accounts": [
+        {
+          "name": "owner",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmPool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "globalAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "destNftTokenAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chromosPortal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "portalProof",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "portalProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "nftMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reportData",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "globalBump",
+          "type": "u8"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GlobalPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "superAdmin",
+            "type": "publicKey"
+          },
+          {
+            "name": "rewardToken",
+            "type": "publicKey"
+          },
+          {
+            "name": "totalStakedCount",
+            "type": "u64"
+          },
+          {
+            "name": "farmCount",
+            "type": "u64"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "reserved2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "FarmData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "farmNumber",
+            "type": "u64"
+          },
+          {
+            "name": "stakedCount",
+            "type": "u64"
+          },
+          {
+            "name": "maxStakeCount",
+            "type": "u64"
+          },
+          {
+            "name": "tierDuration",
+            "type": {
+              "array": [
+                "i64",
+                4
+              ]
+            }
+          },
+          {
+            "name": "tierRate",
+            "type": {
+              "array": [
+                "u64",
+                4
+              ]
+            }
+          },
+          {
+            "name": "isStop",
+            "type": "bool"
+          },
+          {
+            "name": "maxClaimLimit",
+            "type": "u64"
+          },
+          {
+            "name": "rarity",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "reserved2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserPool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "stakedCount",
+            "type": "u64"
+          },
+          {
+            "name": "staking",
+            "type": {
+              "array": [
+                {
+                  "defined": "StakedData"
+                },
+                100
+              ]
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "reserved2",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "StakedData",
+      "docs": [
+        "User PDA Layout"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "publicKey"
+          },
+          {
+            "name": "farmNumber",
+            "type": "u64"
+          },
+          {
+            "name": "stakedTime",
+            "type": "i64"
+          },
+          {
+            "name": "claimedTime",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FarmConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "maxCount",
+            "type": "u64"
+          },
+          {
+            "name": "maxClaim",
+            "type": "u64"
+          },
+          {
+            "name": "rarity",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidSuperOwner",
+      "msg": "Invalid Super Owner"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidInput",
+      "msg": "Invalid Input Data"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidWhitelistAddress",
+      "msg": "Invalid Whitelist Address"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidFarmCount",
+      "msg": "Invalid Farm Count"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidGlobalPool",
+      "msg": "Invalid Global Pool Address"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidUserPool",
+      "msg": "Invalid User Pool Owner Address"
+    },
+    {
+      "code": 6006,
+      "name": "PoolStopped",
+      "msg": "This Farm Pool is Stopped"
+    },
+    {
+      "code": 6007,
+      "name": "ExceedMaxCount",
+      "msg": "Exceed the Max Count of this Pool"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidWithdrawTime",
+      "msg": "Invalid Withdraw Time"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidNFTAddress",
+      "msg": "Not Found Staked Mint"
+    },
+    {
+      "code": 6010,
+      "name": "InsufficientRewardVault",
+      "msg": "Insufficient Reward Token Balance"
+    },
+    {
+      "code": 6011,
+      "name": "InvaliedMetadata",
+      "msg": "Invalid Metadata Address"
+    },
+    {
+      "code": 6012,
+      "name": "MetadataCreatorParseError",
+      "msg": "Can't Parse The NFT's Creators"
+    },
+    {
+      "code": 6013,
+      "name": "UnkownOrNotAllowedNFTCollection",
+      "msg": "Unknown Collection Or The Collection Is Not Allowed"
+    },
+    {
+      "code": 6014,
+      "name": "ReportError",
+      "msg": "Counter Error"
+    }
+  ],
+  "metadata": {
+    "address": "4JtE2McSNFPSqkbAzrQFJwSGGz5r4S5oTvz6Srq6ksom"
+  }
+}

@@ -1,0 +1,591 @@
+{
+  "version": "0.1.0",
+  "name": "evolution",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "deployer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "chromos",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transferAuthority",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newAuthority",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "addWlConfig",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "wlConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cardNumberStr",
+          "type": "string"
+        },
+        {
+          "name": "editionStr",
+          "type": "string"
+        },
+        {
+          "name": "creator",
+          "type": "publicKey"
+        },
+        {
+          "name": "uri",
+          "type": "string"
+        },
+        {
+          "name": "house",
+          "type": "u8"
+        },
+        {
+          "name": "rarity",
+          "type": "u8"
+        },
+        {
+          "name": "set",
+          "type": "u8"
+        },
+        {
+          "name": "power",
+          "type": "u32"
+        },
+        {
+          "name": "health",
+          "type": "u16"
+        },
+        {
+          "name": "attack",
+          "type": "u16"
+        },
+        {
+          "name": "cardNumber",
+          "type": "u32"
+        },
+        {
+          "name": "abilities",
+          "type": {
+            "array": [
+              "u16",
+              5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "addRewardConfig",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardToken",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "rarity",
+          "type": "u8"
+        },
+        {
+          "name": "set",
+          "type": "u8"
+        },
+        {
+          "name": "chromosCost",
+          "type": "u64"
+        },
+        {
+          "name": "rewardToken",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "evolve",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "chromos",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userChromosAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "wlConfig0",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "wlConfig1",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "wlConfig2",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "wlConfig3",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardConfig0",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardConfig1",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardConfig2",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardConfig3",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault0",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault1",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault2",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardVault3",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount0",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount1",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount2",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userRewardAccount3",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mintNft0",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mintNft1",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mintNft2",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mintNft3",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftAccount0",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftAccount1",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftAccount2",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftAccount3",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chromosPortal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "portalProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "portalProof",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "clock",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "burnLegendary",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "chromos",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userChromosAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "rewardConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "wlConfig",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nftMetadata",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "legendaryMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userNftAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "chromosPortal",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "portalProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "portalProof",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reportData",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "chromos",
+            "type": "publicKey"
+          },
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WlConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "uri",
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
+            "name": "house",
+            "type": "u8"
+          },
+          {
+            "name": "rarity",
+            "type": "u8"
+          },
+          {
+            "name": "set",
+            "type": "u8"
+          },
+          {
+            "name": "power",
+            "type": "u32"
+          },
+          {
+            "name": "health",
+            "type": "u16"
+          },
+          {
+            "name": "attack",
+            "type": "u16"
+          },
+          {
+            "name": "cardNumber",
+            "type": "u32"
+          },
+          {
+            "name": "abilities",
+            "type": {
+              "array": [
+                "u16",
+                5
+              ]
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "RewardConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "rarity",
+            "type": "u8"
+          },
+          {
+            "name": "set",
+            "type": "u8"
+          },
+          {
+            "name": "chromosCost",
+            "type": "u64"
+          },
+          {
+            "name": "rewardToken",
+            "type": "publicKey"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidWhitelistAddress",
+      "msg": "Invalid Whitelist Address"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidMetadata",
+      "msg": "Invalid Metadata"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidCreator",
+      "msg": "Invalid Creator"
+    },
+    {
+      "code": 6003,
+      "name": "ReportError",
+      "msg": "Counter Error"
+    }
+  ],
+  "metadata": {
+    "address": "DDbvAgEn9JhNC1KFvvwRYtcCLcWzuLpk5acf2UUUvVem"
+  }
+}
